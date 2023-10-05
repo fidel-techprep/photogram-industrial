@@ -33,7 +33,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav me-auto">
             <li class="nav-item">
               <%= link_to root_path, class: 'nav-link' do %>
                 <i class="fas fa-users"></i> Feed 
@@ -52,7 +52,7 @@
               <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to root_path, class: 'nav-link' do %>
+              <%= link_to "/#{current_user&.username}", class: 'nav-link' do %>
                 <i class="fas fa-home"></i> Your profile
               <% end %>
             </li>
@@ -88,12 +88,9 @@
             <%= notice %>
           </div>
         <% end %>
-
-
-        <%= yield %>
       </div>
     </div>
-
+    <%= yield %>
   </div>
 
 </body>
