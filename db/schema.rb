@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_154250) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_05_203354) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "photo_id_id", null: false
+    t.bigint "user_id_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_id_id"], name: "index_comments_on_photo_id_id"
+    t.index ["user_id_id"], name: "index_comments_on_user_id_id"
+  end
 
   create_table "photos", force: :cascade do |t|
     t.string "image"
@@ -27,15 +36,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_154250) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.citext "email", default: "", null: false
+    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.citext "username"
+    t.string "username"
     t.boolean "private"
-    t.integer "likes_count", default: 0
-    t.integer "comments_count", default: 0
+    t.integer "likes_count"
+    t.integer "comments_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_url"
@@ -45,8 +54,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_154250) do
     t.string "website_url"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "comments", "photos", column: "photo_id_id"
+  add_foreign_key "comments", "users", column: "user_id_id"
   add_foreign_key "photos", "users", column: "owner_id"
 end
