@@ -1,0 +1,96 @@
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <div class="d-flex">
+      <div class="flex-shrink-0">
+        <%= image_tag "http://robohash.org/#{@user.username}", width: 128, class: "me-3 rounded-circle" %>
+      </div>
+      <div class="flex-grow-1 ms-3">
+        <div class="d-flex justify-content-between align-items-center">
+
+          <h1 class="mt-0 mb-3 display-4"><%= @user.username %></h1>
+          <% if @user.private %>
+            <div>
+              <span class="badge text-bg-secondary">
+                Private
+              </span>
+            </div>
+
+          <% end %>
+
+        </div>
+        <div class="row mb-4">
+          <div class="col">
+            <a data-toggle="modal" data-target="#user_530389_followers" href="#" class="link-underline-light">
+              <!--add modal-->
+              <span class="font-weight-bold">
+                2<!--[@user followers here]-->
+              </span>
+
+              followers
+
+            </a>
+          </div>
+          <div class="col">
+            <a data-toggle="modal" data-target="#user_530389_followers" href="#" class="link-underline-light">
+              <!--add modal-->
+              <span class="font-weight-bold">
+                2<!--[@user followers here]-->
+              </span>
+
+              following
+
+            </a>
+          </div>
+          <div class="col">
+            <a data-toggle="modal" data-target="#user_530389_followers" href="#" class="link-underline-light">
+              <!--add modal-->
+              <span class="font-weight-bold">
+                2<!--[@user followers here]-->
+              </span>
+
+              pending
+
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-md-6 offset-md-3">
+
+    <ul class="nav nav-tabs nav-justified mb-1" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" href="/<%= @user.username %>">Posts <span class="badge rounded-pill text-bg-secondary"><%= @user.own_photos.count %></span></a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" href="/<%= @user.username/likes %>">Liked <span class="badge rounded-pill text-bg-secondary"><%= @user.own_photos.count %></span></a>
+      </li>
+
+    </ul>
+    <div class="tab-content tab-justified" id="myTabContent">
+      <div class="tab-pane fade show active" id="posts-tab-pane" role="tabpanel" aria-labelledby="posts-tab" tabindex="0">
+
+        <% @user.own_photos.each do |photo| %>
+          <%= render photo %>
+        <% end %>
+
+      </div>
+      <div class="tab-pane fade" id="likes-tab-pane" role="tabpanel" aria-labelledby="likes-tab" tabindex="0">...</div>
+
+    </div>
+   
+  </div>
+</div>
+
+
+ <!--<ul class="nav nav-tabs nav-justified mb-1">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href=":">Posts <span class="badge rounded-pill text-bg-secondary"><%#= @user.own_photos.count %></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Liked <span class="badge rounded-pill text-bg-secondary"><%#= @user.own_photos.count %></span></a>
+      </li>
+    </ul>-->
