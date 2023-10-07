@@ -13,9 +13,13 @@ class UsersController < ApplicationController
 
   def following
     @user = User.find_by!(username: params.fetch(:username))
+
+    render "users_list", locals: {users_list: @user.leaders}
   end
 
-  def follower
+  def followers
     @user = User.find_by!(username: params.fetch(:username))
+
+    render "users_list", locals: {users_list: @user.followers}
   end
 end
