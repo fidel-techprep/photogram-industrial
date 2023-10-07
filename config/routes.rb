@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   resources :photos
   
 
-  get "/:user" => "users#show"
+  get "/:username" => "users#show", as: :user
 end
