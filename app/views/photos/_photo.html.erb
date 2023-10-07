@@ -1,60 +1,31 @@
-
-<div class="card">
-  <div class="card-body py-3 d-flex align-items-center justify-content-between">
-    <h2 class="h5 m-0 p-0 d-flex align-items-center">
-      <img class="rounded-circle mr-2" width="36" src="https://robohash.org/<%= current_user.username %>">
-
-      <a class="text-dark" href="/<%= current_user.username %>"><%= current_user.username %></a>
-    </h2>
-
-    <div>
-      <a class="btn btn-link btn-sm text-muted" href="<%= edit_photo_path(photo) %>">
-        <i class="fas fa-edit fa-fw"></i>
-      </a>
-      <a class="btn btn-link btn-sm text-muted" rel="nofollow" data-method="delete" href="/photos/3716799">
-        <i class="fas fa-trash fa-fw"></i>
-      </a>  
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <%= image_tag photo.image, class: "card-img-top" %>
+      <div class="card-body">
+        <h5 class="card-title"><%= photo.owner.username %></h5>
+        <p class="card-text"><%= photo.caption %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% photo.comments.each do |comment| %>
+          <li class="list-group-item">
+            <div class="d-flex">
+              <div class="flex-shrink-0">
+                <img src="..." alt="...">
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h5 class="mt-0"><%= comment.author.username %></h5>
+                <p><%= comment.body %></p>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <div class="card-body">
+        <div class="card-body">
+          <%= render "comments/form", comment: photo.comments.build %>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <img class="img-fluid" src="<%= photo.image %>">
-
-  <div class="card-body">
-    <p class="card-text"><%= photo.caption %></p>
-  </div>
-
-  <div class="card-body">
-    <form action="/comments" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="zQBGuToFDx1pSCXuv_2wnn3p3hXuXn1ae6WrlcNebR2QqGstfpL8109TC3ME4n0TN25CGaWl529KPzH2Ia6uGg">
-
-      <input type="hidden" value="3716799" name="comment[photo_id]" id="comment_photo_id">
-
-      <div class="form-group">
-        <label class="sr-only" for="comment_body">Body</label>
-        <textarea class="form-control" name="comment[body]" id="comment_body"></textarea>
-      </div>
-
-      <div class="actions">
-        <input type="submit" name="commit" value="Create Comment" class="btn btn-outline-secondary btn-block" data-disable-with="Create Comment">
-      </div>
-    </form>
   </div>
 </div>
-<div class="card">
-  <div class="card-body py-3 d-flex align-items-center justify-content-between">
-    <h2 class="h5 m-0 p-0 d-flex align-items-center">
-      <img class="rounded-circle mr-2" width="36" src="https://robohash.org/jefferson">
-
-      <a class="text-dark" href="/jefferson">jefferson</a>
-    </h2>
-
-    <div>
-      <a class="btn btn-link btn-sm text-muted" href="/photos/3716278/edit">
-        <i class="fas fa-edit fa-fw"></i>
-      </a>
-      <a class="btn btn-link btn-sm text-muted" rel="nofollow" data-method="delete" href="/photos/3716278">
-        <i class="fas fa-trash fa-fw"></i>
-      </a>   
-    </div>
-  </div>
-
- 
